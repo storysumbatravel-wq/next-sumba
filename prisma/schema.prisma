@@ -1,0 +1,158 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Trip {
+  id             Int               @id @default(autoincrement())
+  slug           String            @unique
+  durationDays   Int
+  durationNights Int
+  price          Float
+  imageUrl       String
+  maxPax         Int               @default(10)
+  minPax         Int               @default(2)
+  featured       Boolean           @default(false)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  flights        FlightInfo[]
+  hotels         HotelInfo[]
+  itineraries    Itinerary[]
+  excludes       TripExclude[]
+  includes       TripInclude[]
+  tips           TripTip[]
+  translations   TripTranslation[]
+
+  @@map("trips")
+}
+
+model TripTranslation {
+  id          Int    @id @default(autoincrement())
+  tripId      Int
+  locale      String
+  name        String
+  subtitle    String
+  description String @db.Text
+  trip        Trip   @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@unique([tripId, locale])
+  @@map("trip_translations")
+}
+
+model Itinerary {
+  id           Int                    @id @default(autoincrement())
+  tripId       Int
+  dayNumber    Int
+  imageUrl     String?
+  destinations Destination[]
+  trip         Trip                   @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  translations ItineraryTranslation[]
+
+  @@index([tripId], map: "itineraries_tripId_fkey")
+  @@map("itineraries")
+}
+
+model ItineraryTranslation {
+  id          Int       @id @default(autoincrement())
+  itineraryId Int
+  locale      String
+  title       String
+  description String    @db.Text
+  meals       String    @default("")
+  activities  String    @db.Text
+  itinerary   Itinerary @relation(fields: [itineraryId], references: [id], onDelete: Cascade)
+
+  @@unique([itineraryId, locale])
+  @@map("itinerary_translations")
+}
+
+model Destination {
+  id          Int       @id @default(autoincrement())
+  itineraryId Int
+  imageUrl    String
+  name        String
+  order       Int       @default(0)
+  itinerary   Itinerary @relation(fields: [itineraryId], references: [id], onDelete: Cascade)
+
+  @@index([itineraryId], map: "destinations_itineraryId_fkey")
+  @@map("destinations")
+}
+
+model FlightInfo {
+  id            Int    @id @default(autoincrement())
+  tripId        Int
+  airline       String
+  flightNumber  String
+  departureCity String
+  arrivalCity   String
+  departureTime String
+  arrivalTime   String
+  order         Int    @default(0)
+  trip          Trip   @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@index([tripId], map: "flight_infos_tripId_fkey")
+  @@map("flight_infos")
+}
+
+model HotelInfo {
+  id          Int     @id @default(autoincrement())
+  tripId      Int
+  name        String
+  location    String
+  checkInDay  Int
+  checkOutDay Int
+  imageUrl    String?
+  trip        Trip    @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@index([tripId], map: "hotel_infos_tripId_fkey")
+  @@map("hotel_infos")
+}
+
+model TripInclude {
+  id     Int    @id @default(autoincrement())
+  tripId Int
+  locale String
+  item   String
+  trip   Trip   @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@index([tripId], map: "trip_includes_tripId_fkey")
+  @@map("trip_includes")
+}
+
+model TripExclude {
+  id     Int    @id @default(autoincrement())
+  tripId Int
+  locale String
+  item   String
+  trip   Trip   @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@index([tripId], map: "trip_excludes_tripId_fkey")
+  @@map("trip_excludes")
+}
+
+model TripTip {
+  id     Int    @id @default(autoincrement())
+  tripId Int
+  locale String
+  tip    String
+  trip   Trip   @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@index([tripId], map: "trip_tips_tripId_fkey")
+  @@map("trip_tips")
+}
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  createdAt DateTime @default(now())
+
+  @@map("contacts")
+}

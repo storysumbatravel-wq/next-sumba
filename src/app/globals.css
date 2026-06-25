@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  /* Fonts */
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "DM Sans", Helvetica, Arial, sans-serif;
+
+  /* Terracotta */
+  --color-terracotta-50: #fdf2ee;
+  --color-terracotta-100: #fadfdb;
+  --color-terracotta-200: #f5b8ad;
+  --color-terracotta-300: #ed8a74;
+  --color-terracotta-400: #c4532e;
+  --color-terracotta-500: #a3421f;
+  --color-terracotta-600: #833418;
+  --color-terracotta-700: #632712;
+  --color-terracotta-800: #431a0c;
+  --color-terracotta-900: #230d06;
+
+  /* Navy */
+  --color-navy-50: #e8ecf3;
+  --color-navy-100: #c5cde1;
+  --color-navy-200: #8b9bc3;
+  --color-navy-300: #5169a5;
+  --color-navy-400: #1b2a4a;
+  --color-navy-500: #15223c;
+  --color-navy-600: #101b30;
+  --color-navy-700: #0b1424;
+  --color-navy-800: #060d18;
+  --color-navy-900: #03060c;
+
+  /* Gold */
+  --color-gold-50: #fbf6e9;
+  --color-gold-100: #f5eac8;
+  --color-gold-200: #edda9e;
+  --color-gold-300: #d4a853;
+  --color-gold-400: #c49a3d;
+  --color-gold-500: #a47e2b;
+  --color-gold-600: #846219;
+  --color-gold-700: #644a11;
+  --color-gold-800: #443209;
+  --color-gold-900: #241a04;
+
+  /* Cream */
+  --color-cream-50: #fdfcfa;
+  --color-cream-100: #faf6f0;
+  --color-cream-200: #f0eae0;
+  --color-cream-300: #e8dcc8;
+  --color-cream-400: #d4c4a8;
+  --color-cream-500: #c0ac88;
+}
+
+/* Base styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream-100 text-navy-400 font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-terracotta-400/20 text-terracotta-600;
+  }
+}
+
+/* Custom utilities */
+@utility line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@utility drop-cap {
+  &::first-letter {
+    float: left;
+    margin-right: 0.5rem;
+    margin-top: 0.25rem;
+    font-family: var(--font-serif);
+    font-size: 3.75rem;
+    line-height: 1;
+    color: var(--color-terracotta-400);
+  }
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0eae0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4c4a8;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c4532e;
+}
