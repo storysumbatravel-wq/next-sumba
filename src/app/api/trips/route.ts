@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/db";
+import { prisma } from "@/lib/db";
 
 // GET /api/trips — Mendapatkan semua trip
 export async function GET() {
