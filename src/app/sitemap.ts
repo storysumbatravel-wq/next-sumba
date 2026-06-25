@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { MetadataRoute } from "next";
-import prisma from "@/lib/db";
+import { prisma } from "@/lib/db";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const trips = await prisma.trip.findMany({

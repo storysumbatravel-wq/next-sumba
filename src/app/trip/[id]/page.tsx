@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import prisma from "@/lib/db";
+import { prisma } from "@/lib/db";
 import TripDetailClient from "./TripDetailClient";
 
 // Fungsi untuk generate SEO dinamis berdasarkan slug trip
