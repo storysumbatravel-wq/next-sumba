@@ -3,10 +3,11 @@ import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || "https://storysumba.com",
+    process.env.NEXT_PUBLIC_APP_URL ?? "https://storysumbatravel.com",
   ),
   title: {
     template: "%s | StorySumba",
@@ -27,16 +28,16 @@ export const metadata: Metadata = {
 
   // ====== TAMBAHKAN INI UNTUK FAVICON DI TAB BROWSER ======
   icons: {
-    icon: "/images/logo-ico.ico", // Ganti dengan path logo Anda di folder public
-    shortcut: "/images/logo-ico.ico",
-    apple: "/images/logo-ico.ico", // Untuk shortcut di homescreen HP Apple
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
   // ========================================================
 
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: "https://storysumba.com",
+    url: process.env.NEXT_PUBLIC_APP_URL,
     siteName: "StorySumba",
     title: "StorySumba — Authentic Sumba Travel Agent",
     description:
@@ -83,6 +84,7 @@ export default function RootLayout({
           <main className="min-h-screen">{children}</main>
           <Footer />
         </LanguageProvider>
+        <GoogleAnalytics />
       </body>
     </html>
   );
