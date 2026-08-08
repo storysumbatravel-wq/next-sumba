@@ -66,7 +66,7 @@ export default function Footer() {
             </h4>
 
             <div className="flex gap-4">
-              {/* ===== INSTAGRAM ===== */}
+              {/* ====== INSTAGRAM ====== */}
               <button
                 type="button"
                 onClick={() =>
