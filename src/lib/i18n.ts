@@ -192,7 +192,7 @@ export const translations = {
       office: "Kantor Kami",
       address:
         "Jl. Rambu Duka, RT 026 / RW 009, Prailiu, Sumba Timur, NTT, Indonesia",
-      phoneNum: "+62 812 4699 4982",
+      phoneNum: "+62 812 8776 3530",
       emailAddr: "storysumbatravel@gmail.com",
     },
     footer: {
