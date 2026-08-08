@@ -62,7 +62,6 @@ export default function Footer() {
           <div>
             <h4 className="font-serif text-lg text-gold-300 mb-4">
               {t.footer.followUs}
-              <span className="text-xs text-red-400">v2</span>
             </h4>
 
             <div className="flex gap-4">
