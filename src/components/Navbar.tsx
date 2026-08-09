@@ -47,7 +47,9 @@ export default function Navbar() {
             />
           )}
           <span
-            className={`font-serif text-xl font-bold tracking-tight transition-colors duration-300 ${scrolled ? "text-navy-400" : "text-white"}`}
+            className={`font-serif text-xl font-bold tracking-tight transition-colors duration-300 ${
+              scrolled ? "text-navy-400" : "text-white"
+            }`}
           >
             StorySumba
           </span>
@@ -72,6 +74,7 @@ export default function Navbar() {
             {(["en", "id"] as Locale[]).map((l) => (
               <button
                 key={l}
+                type="button"
                 onClick={() => setLocale(l)}
                 className={`px-2 py-1 text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
                   locale === l
@@ -89,8 +92,11 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
+          type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
-          className={`md:hidden transition-colors ${scrolled ? "text-navy-400" : "text-white"}`}
+          className={`md:hidden transition-colors cursor-pointer ${
+            scrolled ? "text-navy-400" : "text-white"
+          }`}
           aria-label="Toggle menu"
         >
           <svg
@@ -119,8 +125,12 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="md:hidden bg-cream-100/98 backdrop-blur-md border-t border-cream-300">
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          mobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="bg-cream-100/98 backdrop-blur-md border-t border-cream-300">
           <div className="px-6 py-4 space-y-3">
             {navLinks.map((link) => (
               <Link
@@ -136,11 +146,12 @@ export default function Navbar() {
               {(["en", "id"] as Locale[]).map((l) => (
                 <button
                   key={l}
+                  type="button"
                   onClick={() => {
                     setLocale(l);
                     setMobileOpen(false);
                   }}
-                  className={`px-3 py-1 text-sm font-bold uppercase ${
+                  className={`px-3 py-1 text-sm font-bold uppercase cursor-pointer ${
                     locale === l
                       ? "text-terracotta-400 bg-terracotta-50"
                       : "text-navy-300"
@@ -152,7 +163,7 @@ export default function Navbar() {
             </div>
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 }
